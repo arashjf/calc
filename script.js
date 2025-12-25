@@ -1,5 +1,7 @@
 const display = document.getElementById("display");
 const divbtn = document.getElementById("buttons");
+const themButton = document.getElementById("moonImg");
+const body = document.querySelector("body");
 const validList = [
   "1",
   "2",
@@ -21,23 +23,15 @@ const validList = [
   ".",
   "=",
 ];
-const oprator = [
-  "%",
-  "/",
-  "*",
-  "-",
-  "+",
-  ".",
-  "="
-]
+const oprator = ["%", "/", "*", "-", "+", ".", "="];
 
 function valid(innerContent) {
   if (validList.includes(innerContent)) calc(innerContent);
 }
 
 function calc(item) {
-  if (display.innerText === "" & oprator.includes(item)) return; 
-  
+  if ((display.innerText === "") & oprator.includes(item)) return;
+
   if (item === "C") {
     display.innerText = "";
     return;
@@ -57,9 +51,15 @@ function calc(item) {
     display.innerText /= 100;
     return;
   }
-  
+
   display.innerText += item;
 }
 
-divbtn.addEventListener("click", e => valid(e.target.innerText));
+divbtn.addEventListener("click", (e) => valid(e.target.innerText));
 
+themButton.addEventListener("click", () => {
+  body.classList.toggle("dark-them");
+  themButton.src = body.classList.contains("dark-them")
+    ? "sun-svgrepo-com.png"
+    : "moon-svgrepo-com (1).png";
+});
